@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>うさくま おやこ絵本クリエイター 🐻🐰</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Kosugi+Maru&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['"Kosugi Maru"', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #fce7ec;
+            background-image: radial-gradient(#f9b9ca 25%, transparent 25%),
+                              radial-gradient(#f9b9ca 25%, transparent 25%);
+            background-size: 20px 20px;
+            background-position: 0 0, 10px 10px;
+            -webkit-tap-highlight-color: transparent;
+        }
+        body.theme-monotone {
+            background-color: #f1f5f9;
+            background-image: radial-gradient(#cbd5e1 25%, transparent 25%),
+                              radial-gradient(#cbd5e1 25%, transparent 25%);
+        }
+        body.theme-lavender {
+            background-color: #f3e8ff;
+            background-image: radial-gradient(#e9d5ff 25%, transparent 25%),
+                              radial-gradient(#e9d5ff 25%, transparent 25%);
+        }
+    </style>
+</head>
+<body class="min-h-screen p-0 flex flex-col items-center justify-start font-sans" id="app-body">
+    <div id="main-card" class="w-full max-w-md bg-white min-h-screen flex flex-col shadow-2xl transition-all duration-400">
+        <div id="app-header" class="bg-[#fcd2dc] p-5 pb-4 flex flex-col items-center text-center">
+            <div class="flex items-start justify-center gap-2 text-2xl font-bold text-[#b43c5c] leading-tight tracking-wide max-w-[280px]">
+                <span class="text-3xl mt-0.5">🐰</span>
+                <span class="text-left">うさくま おやこ絵本クリエイター <span class="inline-block text-2xl">🐻</span></span>
+            </div>
+            <div class="bg-white rounded-full p-1 flex items-center justify-between px-4 py-1.5 text-sm w-full mt-4 border border-[#f9acc0]">
+                <span class="text-[#b43c5c] font-bold text-xs flex items-center gap-1">🔮 きぶん：</span>
+                <div class="flex gap-1 text-xs">
+                    <button id="btn-theme-pink" onclick="changeTheme('pink')" class="px-3 py-1 rounded-full font-bold bg-[#ee768c] text-white shadow-sm transition-all">ピンク</button>
+                    <button id="btn-theme-monotone" onclick="changeTheme('monotone')" class="px-3 py-1 rounded-full font-bold text-gray-500 hover:bg-gray-100 transition-all">モノトーン</button>
+                    <button id="btn-theme-lavender" onclick="changeTheme('lavender')" class="px-3 py-1 rounded-full font-bold text-purple-500 hover:bg-purple-100 transition-all">ラベンダー</button>
+                </div>
+            </div>
+            <button onclick="showHome()" class="bg-white hover:bg-pink-50 text-[#b43c5c] border-2 border-white font-bold px-5 py-1 rounded-full text-xs shadow-md transition-all flex items-center gap-1 mt-3 active:scale-95">
+                🏠 はじめから
+            </button>
+        </div>
+        <div class="p-6 flex-grow flex flex-col justify-start bg-white">
+            <div id="screen-home" class="flex flex-col items-center text-center space-y-6">
+                <div class="flex items-center justify-center gap-4 text-5xl my-4">
+                    <span class="text-red-500">🎁</span>
+                    <span>🐻</span>
+                    <span class="text-purple-500">🐰</span>
+                    <span class="text-amber-400">✨</span>
+                </div>
+                <div class="space-y-2">
+                    <h2 class="text-2xl font-bold text-[#b43c5c] leading-snug" id="home-title">きょうは どのお話をつくる？</h2>
+                    <p class="text-gray-400 text-sm font-medium">好きなテーマをぽちっと選んでね！</p>
+                </div>
+                <div class="w-full space-y-4 pt-2">
+                    <button onclick="startStory('おかしの家へのひみつの招待状', '🍬')" class="w-full bg-[#fff4f6] hover:bg-[#ffebee] border-2 border-[#fcd2dc] p-4 rounded-2xl flex items-center gap-4 transition-all text-left active:scale-98 shadow-sm">
+                        <div class="bg-white text-2xl w-14 h-14 flex items-center justify-center rounded-full shadow-sm border border-pink-100 flex-shrink-0 text-purple-500">🍬</div>
+                        <div class="flex-grow">
+                            <span class="bg-[#fcd2dc] text-[#b43c5c] font-bold text-[10px] px-2.5 py-0.5 rounded-full">パターン 1</span>
+                            <h3 class="font-bold text-gray-700 text-base mt-1">おかしの家へのひみつの招待状</h3>
+                        </div>
+                    </button>
+                    <button onclick="startStory('まほうのピンクのかさでおさんぽ', '☂️')" class="w-full bg-[#fff4f6] hover:bg-[#ffebee] border-2 border-[#fcd2dc] p-4 rounded-2xl flex items-center gap-4 transition-all text-left active:scale-98 shadow-sm">
+                        <div class="bg-white text-2xl w-14 h-14 flex items-center justify-center rounded-full shadow-sm border border-pink-100 flex-shrink-0 text-blue-500">☂️</div>
+                        <div class="flex-grow">
+                            <span class="bg-[#fcd2dc] text-[#b43c5c] font-bold text-[10px] px-2.5 py-0.5 rounded-full">パターン 2</span>
+                            <h3 class="font-bold text-gray-700 text-base mt-1">まほうのピンクのかさでおさんぽ</h3>
+                        </div>
+                    </button>
+                </div>
+            </div>
+            <div id="screen-story" class="hidden flex flex-col space-y-5">
+                <div class="flex justify-between items-center bg-gray-50 px-3 py-2 rounded-xl text-xs text-gray-500 border border-gray-100">
+                    <span id="story-title" class="font-bold text-[#b43c5c]">おはなし</span>
+                    <span class="font-bold bg-[#fcd2dc] text-[#b43c5c] px-2.5 py-0.5 rounded-full">ページ 1 / 1</span>
+                </div>
+                <div class="bg-[#fff4f6] border-2 border-[#fcd2dc] p-5 rounded-2xl flex flex-col items-center text-center space-y-3">
+                    <div id="page-emoji" class="text-5xl bg-white w-16 h-16 flex items-center justify-center rounded-2xl shadow-sm border border-pink-100">🐻</div>
+                    <p id="page-guide" class="text-sm text-gray-600 font-bold px-1 leading-relaxed">ここにお話のシチュエーションが表示されます！</p>
+                </div>
+                <div class="space-y-3">
+                    <div class="space-y-1">
+                        <label class="text-xs font-bold text-gray-500 block pl-1">🐻 クマちゃんのセリフ：</label>
+                        <input type="text" id="input-char1" oninput="updatePreview()" placeholder="なにをおはなししようかな？" class="w-full px-3 py-2.5 text-sm bg-gray-50 border-2 border-gray-100 rounded-xl outline-none focus:border-[#ee768c] focus:bg-white transition-all">
+                    </div>
+                    <div class="space-y-1">
+                        <label class="text-xs font-bold text-gray-500 block pl-1">🐰 ウサギちゃんのセリフ：</label>
+                        <input type="text" id="input-char2" oninput="updatePreview()" placeholder="たのしい言葉をいれてね！" class="w-full px-3 py-2.5 text-sm bg-gray-50 border-2 border-gray-100 rounded-xl outline-none focus:border-[#ee768c] focus:bg-white transition-all">
+                    </div>
+                </div>
+                <div class="bg-[#fff4f6]/50 border border-[#fcd2dc]/60 p-4 rounded-2xl space-y-2 text-sm shadow-inner">
+                    <div class="flex gap-1"><span class="font-bold text-[#b43c5c] flex-shrink-0">🐻「</span><span id="preview-1" class="text-gray-400 italic">入力してね</span><span class="font-bold text-[#b43c5c] flex-shrink-0">」</span></div>
+                    <div class="flex gap-1"><span class="font-bold text-[#b43c5c] flex-shrink-0">🐰「</span><span id="preview-2" class="text-gray-400 italic">入力してね</span><span class="font-bold text-[#b43c5c] flex-shrink-0">」</span></div>
+                </div>
+                <div class="flex gap-3 pt-1">
+                    <button onclick="showHome()" class="w-1/3 bg-gray-100 hover:bg-gray-200 text-gray-600 font-bold py-3 rounded-xl text-xs transition-all active:scale-95">
+                        もどる
+                    </button>
+                    <button onclick="alert('絵本がかんせいしたよ！✨')" class="w-2/3 bg-[#ee768c] hover:bg-[#e05d75] text-white font-bold py-3 rounded-xl text-xs shadow-md transition-all active:scale-95">
+                        できた！ 🎉
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        function showScreen(id) {
+            document.getElementById('screen-home').classList.add('hidden');
+            document.getElementById('screen-story').classList.add('hidden');
+            document.getElementById(id).classList.remove('hidden');
+        }
+        function startStory(title, emoji) {
+            document.getElementById('story-title').innerText = title;
+            document.getElementById('page-emoji').innerText = emoji;
+            if(emoji === '🍬') {
+                document.getElementById('page-guide').innerText = "ポストにピンクのリボンがついた可愛い手紙が届いたよ！おかしの家への招待状みたい。";
+            } else {
+                document.getElementById('page-guide').innerText = "お外はしとしと雨。退屈していた二人の前に、キラキラ光るピンクの傘が現れたよ！";
+            }
+            document.getElementById('input-char1').value = '';
+            document.getElementById('input-char2').value = '';
+            updatePreview();
+            showScreen('screen-story');
+        }
+        function updatePreview() {
+            const c1 = document.getElementById('input-char1').value;
+            const c2 = document.getElementById('input-char2').value;
+            const p1 = document.getElementById('preview-1');
+            const p2 = document.getElementById('preview-2');
+            if(c1) { p1.innerText = c1; p1.className = "text-gray-700 font-bold"; } 
+            else { p1.innerText = "入力してね"; p1.className = "text-gray-400 italic"; }
+            if(c2) { p2.innerText = c2; p2.className = "text-gray-700 font-bold"; } 
+            else { p2.innerText = "入力してね"; p2.className = "text-gray-400 italic"; }
+        }
+        function changeTheme(theme) {
+            const body = document.getElementById('app-body');
+            const card = document.getElementById('main-card');
+            const header = document.getElementById('app-header');
+            const title = document.getElementById('home-title');
+            ['pink', 'monotone', 'lavender'].forEach(t => {
+                const btn = document.getElementById(`btn-theme-${t}`);
+                btn.className = "px-3 py-1 rounded-full font-bold transition-all text-xs";
+                if(t === 'pink') btn.classList.add('text-[#b43c5c]');
+                if(t === 'monotone') btn.classList.add('text-gray-500');
+                if(t === 'lavender') btn.classList.add('text-purple-500');
+            });
+            body.className = "min-h-screen p-0 flex flex-col items-center justify-start font-sans";
+            if(theme === 'pink') {
+                body.style.backgroundColor = "#fce7ec";
+                header.className = "bg-[#fcd2dc] p-5 pb-4 flex flex-col items-center text-center w-full";
+                title.className = "text-2xl font-bold text-[#b43c5c] leading-snug";
+                document.getElementById('btn-theme-pink').className = "px-3 py-1 rounded-full font-bold bg-[#ee768c] text-white shadow-sm transition-all text-xs";
+            } 
+            else if(theme === 'monotone') {
+                body.classList.add('theme-monotone');
+                header.className = "bg-slate-200 p-5 pb-4 flex flex-col items-center text-center w-full";
+                title.className = "text-2xl font-bold text-slate-700 leading-snug";
+                document.getElementById('btn-theme-monotone').className = "px-3 py-1 rounded-full font-bold bg-slate-500 text-white shadow-sm transition-all text-xs";
+            } 
+            else if(theme === 'lavender') {
+                body.classList.add('theme-lavender');
+                header.className = "bg-purple-200 p-5 pb-4 flex flex-col items-center text-center w-full";
+                title.className = "text-2xl font-bold text-purple-700 leading-snug";
+                document.getElementById('btn-theme-lavender').className = "px-3 py-1 rounded-full font-bold bg-purple-500 text-white shadow-sm transition-all text-xs";
+            }
+        }
+        function showHome() {
+            showScreen('screen-home');
+        }
+    </script>
+</body>
+</html>
